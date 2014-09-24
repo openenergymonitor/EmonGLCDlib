@@ -1,4 +1,8 @@
-About {#index}
+
+Forked from http://github.com/jcw/glcdlib
+
+Tweaked for use with Vatronix ST7565 LCD and emonGLCD V2 by Glyn Hudson 
+
 =====
 
 **GLCDlib** is a graphics library for 128x64 displays based on the ST7565.

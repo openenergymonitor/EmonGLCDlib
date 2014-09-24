@@ -3,6 +3,8 @@ Forked from http://github.com/jcw/glcdlib
 
 Tweaked for use with Vatronix ST7565 LCD and emonGLCD V2 by Glyn Hudson 
 
+Tested with Vatronix 128 x 64 TG12864L-04WA0 module 
+
 =====
 
 **GLCDlib** is a graphics library for 128x64 displays based on the ST7565.
