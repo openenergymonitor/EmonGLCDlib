@@ -11,7 +11,7 @@
 #define BLACK         0
 #define WHITE         1
 
-#define LCDWIDTH      128
+#define LCDWIDTH      130
 #define LCDHEIGHT     64
 
 #define SCROLLUP      1
@@ -23,8 +23,9 @@ class GLCD_ST7565 {
 public:
     GLCD_ST7565 () {}
 
-    static void begin(byte contrast =0x15); // use 0x1A when powered from 4.2V
+    //static void begin(byte contrast =0x15); // use 0x1A when powered from 4.2V
                                         // see http://forum.jeelabs.net/node/47
+    static void begin(byte contrast =0x1A);   //emonGLCD V2.1 3.3V
     static void backLight(byte level);
     static void clear();
     static void refresh();

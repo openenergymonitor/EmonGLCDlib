@@ -18,7 +18,8 @@
 #define PIN_A0   17
 #define PIN_RST  7
 
-#define LCDUNUSEDSTARTBYTES 4
+//#define LCDUNUSEDSTARTBYTES 4      //JeeLabs GLCD  
+#define LCDUNUSEDSTARTBYTES 1      //emonGLCD V2
 
 #define swap(a, b) { byte t = a; a = b; b = t; }
 
@@ -125,7 +126,7 @@ static void st7565_Init() {
     st7565_Command(CMD_SET_DISP_START_LINE);
     st7565_Command(CMD_SET_POWER_CONTROL);
     st7565_Command(CMD_SET_RESISTOR_RATIO);
-    // st7565_Command(CMD_SET_BIAS_9);
+    //st7565_Command(CMD_SET_BIAS_9);
 
 #if enablePartialUpdate
     xUpdateMax = 0;
@@ -259,8 +260,8 @@ byte GLCD_ST7565::drawChar(byte x, byte y, char c) {
 
 byte GLCD_ST7565::drawString(byte x, byte y, const char *c) {
     while (*c) {
-        byte w = drawChar(x, y, *c++);
-        x += w;
+        byte w = drawChar(x, y, *c++);        
+	x += w;
         if (x + w >= LCDWIDTH) {
             x = 0;    // ran out of this line
             if (y + fontInfo.height >= LCDHEIGHT)

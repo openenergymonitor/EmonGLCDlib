@@ -18,7 +18,8 @@
 #define PIN_A0   17
 #define PIN_RST  7
 
-#define LCDUNUSEDSTARTBYTES 4
+//#define LCDUNUSEDSTARTBYTES 4      //JeeLabs GLCD  
+#define LCDUNUSEDSTARTBYTES 0      //emonGLCD V2
 
 #define swap(a, b) { byte t = a; a = b; b = t; }
 
@@ -55,8 +56,8 @@ static byte yUpdateMax;
 #endif
 
 // If the top line is appearing halfway down the screen, try the other mode.
-#define PAGE_FLIP 0x7
-// #define PAGE_FLIP 0x3
+//#define PAGE_FLIP 0x7
+#define PAGE_FLIP 0x3		//emonGLCD V2.1
 
 const bool rotate180=false;
 // This const switches in the code for operating an LCD panel rotated by 180 degrees.
@@ -125,7 +126,7 @@ static void st7565_Init() {
     st7565_Command(CMD_SET_DISP_START_LINE);
     st7565_Command(CMD_SET_POWER_CONTROL);
     st7565_Command(CMD_SET_RESISTOR_RATIO);
-    // st7565_Command(CMD_SET_BIAS_9);
+    //st7565_Command(CMD_SET_BIAS_9);
 
 #if enablePartialUpdate
     xUpdateMax = 0;
@@ -145,7 +146,7 @@ void GLCD_ST7565::begin(byte contrast) {
 }
 
 void GLCD_ST7565::backLight(byte level) {
-    analogWrite(3, level);
+    analogWrite(5, level);				//emonGLCD V2.1 Digital 5 
 }
 
 // the most basic function, set a single pixel
@@ -259,8 +260,8 @@ byte GLCD_ST7565::drawChar(byte x, byte y, char c) {
 
 byte GLCD_ST7565::drawString(byte x, byte y, const char *c) {
     while (*c) {
-        byte w = drawChar(x, y, *c++);
-        x += w;
+        byte w = drawChar(x, y, *c++);        
+	x += w;
         if (x + w >= LCDWIDTH) {
             x = 0;    // ran out of this line
             if (y + fontInfo.height >= LCDHEIGHT)
